@@ -1,14 +1,42 @@
+// Node modules
+import * as v from "valibot";
+import { Form, useForm } from "@formisch/react";
+
+// Project files
 import InputField from "./components/InputField";
 
+const schema = v.object({
+  name: v.pipe(
+    v.string("Please enter your full name."),
+    v.nonEmpty("Please enter your full name."),
+    v.minLength(3, "Your names must have 3 characters or more."),
+  ),
+  email: v.pipe(
+    v.string("Please enter your email."),
+    v.nonEmpty("Please enter your email."),
+    v.email("The email address is badly formatted."),
+  ),
+});
+
 export default function App() {
+  const form = useForm({
+    schema: schema,
+    validate: "blur",
+    revalidate: "blur",
+  });
+
+  function onSubmit() {
+    alert("submitted");
+  }
+
   return (
     <div id="App">
       <h1>This is a Sample Form Page</h1>
-      <form>
+      <Form of={form} onSubmit={onSubmit}>
         <InputField id="name" label="Full name" placeholder="Jhon Smith" />
         <InputField id="email" label="E-mail" placeholder="jhon@email.com" />
         <input type="submit" />
-      </form>
+      </Form>
     </div>
   );
 }
