@@ -1,0 +1,32 @@
+:root {
+  /* Spacing */
+  --space-medium: 8px;
+  --space-medium: 16px;
+}
+
+body {
+  max-width: 660px;
+  margin-inline: auto;
+  font-family: "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  font-weight: 300;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-medium);
+  gap: var(--space-medium);
+  background-color: lightgray;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  padding: 0;
+  border: none;
+
+  label {
+    font-weight: 500;
+  }
+}
