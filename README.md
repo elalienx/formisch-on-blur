@@ -18,3 +18,8 @@ root/
 
 - Run app: `pnpm dev`
 - Run tests in UI mode: `pnpm playwright --ui`
+
+## Test explanation
+
+The following table explains the steps I have tried to produce
+![alt text](public/table.png)
