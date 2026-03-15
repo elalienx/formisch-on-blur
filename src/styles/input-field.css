@@ -21,6 +21,14 @@
     border-color: var(--color-blue);
   }
 
+  input.success {
+    border-color: var(--color-green);
+  }
+
+  input.error {
+    border-color: var(--color-red);
+  }
+
   .validation-message {
     color: var(--color-red);
   }
