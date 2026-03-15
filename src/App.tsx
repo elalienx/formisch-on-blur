@@ -40,7 +40,7 @@ export default function App() {
       <Form of={form} onSubmit={onSubmit}>
         <InputField id="name" label="Full name" placeholder="Jhon Smith" />
         <InputField id="email" label="E-mail" placeholder="jhon@email.com" />
-        <input type="submit" />
+        <button type="submit">Submit</button>
       </Form>
     </div>
   );

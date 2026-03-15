@@ -1,11 +1,19 @@
 :root {
+  /* Colors */
+  --color-red: #c82c2c;
+  --color-green: #2ac768;
+  --color-blue: #0071eb;
+
   /* Spacing */
-  --space-medium: 8px;
+  --space-small: 8px;
   --space-medium: 16px;
+
+  /* Other */
+  --border-radius: 8px;
 }
 
 body {
-  max-width: 660px;
+  max-width: 550px;
   margin-inline: auto;
   font-family: "Helvetica Neue", Helvetica, system-ui, sans-serif;
   font-weight: 300;
@@ -17,6 +25,15 @@ form {
   padding: var(--space-medium);
   gap: var(--space-medium);
   background-color: lightgray;
+  border-radius: var(--border-radius);
+}
+
+button {
+  min-height: 44px;
+  background-color: var(--color-blue);
+  border-radius: var(--border-radius);
+  color: white;
+  border: none;
 }
 
 .input-field {
@@ -28,5 +45,12 @@ form {
 
   label {
     font-weight: 500;
+  }
+
+  input {
+    height: 44px;
+    padding-inline: var(--space-small);
+    border-radius: var(--border-radius);
+    border: none;
   }
 }
