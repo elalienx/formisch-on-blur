@@ -30,7 +30,7 @@ export default function App() {
   }
 
   return (
-    <div id="App">
+    <div>
       <h1>Sample Form Page</h1>
 
       <Form of={form} onSubmit={submitForm}>
