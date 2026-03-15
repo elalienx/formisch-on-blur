@@ -5,11 +5,14 @@ This will allow the user to calmy type in the inputs and only see an error messa
 
 ## Project structure
 
-playwright/App.spec.tsx 👈 Tests
-src/
--- styles/
--- App.tsx 👈 Form entry point
--- InputField.tsx 👈 Form field with label and error handling.
+```
+root/
+-- playwright/App.spec.tsx 👈 Tests
+-- src/
+---- styles/
+---- App.tsx 👈 Entry point
+---- InputField.tsx 👈 Component with UI color code issues
+```
 
 ## Run commands
 
