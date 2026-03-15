@@ -1,9 +1,9 @@
 :root {
   /* Colors */
-  --color-red: #c82c2c;
-  --color-green: #2ac768;
-  --color-blue: #0071eb;
-  --color-gray: #949596;
+  --color-red: rgb(200, 44, 44);
+  --color-green: rgb(42, 199, 104);
+  --color-blue: rgb(0, 113, 235);
+  --color-gray: rgb(148, 149, 150);
 
   /* Spacing */
   --space-small: 8px;

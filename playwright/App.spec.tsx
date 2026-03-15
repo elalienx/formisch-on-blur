@@ -6,6 +6,10 @@ import App from "../src/App";
 
 const invalidName = "Ed"; // Below minimum length of three
 const validName = "Eduardo";
+const colorError = "rgb(200, 44, 44)";
+const colorSuccess = "rgb(42, 199, 104)";
+const colorFocus = "rgb(0, 113, 235)";
+const colorDefault = "rgb(148, 149, 150)";
 let cleanUpText: Locator; // Used so we can see is the input fields have the correct UI color, as Playwright uses blue to indicate which component is asserting.
 let input1: Locator;
 let input2: Locator;
@@ -30,8 +34,8 @@ test("1. Should show error state when submitting empty form", async () => {
   await submitButton.click();
 
   // Assert
-  await expect(input1).toHaveClass(/error/);
-  await expect(input2).toHaveClass(/error/);
+  await expect(input1).toHaveCSS("border-color", colorError);
+  await expect(input2).toHaveCSS("border-color", colorError);
 });
 
 test("2. Should show active state when input is focused and untouched", async () => {
@@ -39,8 +43,8 @@ test("2. Should show active state when input is focused and untouched", async ()
   await input1.focus();
 
   // Assert
-  await expect(input1).toHaveClass(/focus/);
-  await expect(input2).toHaveClass(/default/);
+  await expect(input1).toHaveCSS("border-color", colorFocus);
+  await expect(input2).toHaveCSS("border-color", colorDefault);
 });
 
 test("3. Should return to default state when input is focused and then blurred without typing", async () => {
@@ -49,8 +53,8 @@ test("3. Should return to default state when input is focused and then blurred w
   await input1.blur();
 
   // Assert
-  await expect(input1).toHaveClass(/default/);
-  await expect(input2).toHaveClass(/default/);
+  await expect(input1).toHaveCSS("border-color", colorDefault);
+  await expect(input2).toHaveCSS("border-color", colorDefault);
 });
 
 test("4. Should remain active while typing invalid value without blurring", async () => {
@@ -58,8 +62,8 @@ test("4. Should remain active while typing invalid value without blurring", asyn
   await input1.fill(invalidName);
 
   // Assert
-  await expect(input1).toHaveClass(/focus/);
-  await expect(input2).toHaveClass(/default/);
+  await expect(input1).toHaveCSS("border-color", colorFocus);
+  await expect(input2).toHaveCSS("border-color", colorDefault);
 });
 
 test("5. Should show error state when invalid value is entered and input is blurred", async () => {
@@ -68,8 +72,8 @@ test("5. Should show error state when invalid value is entered and input is blur
   await input1.blur();
 
   // Assert
-  await expect(input1).toHaveClass(/error/);
-  await expect(input2).toHaveClass(/default/);
+  await expect(input1).toHaveCSS("border-color", colorError);
+  await expect(input2).toHaveCSS("border-color", colorDefault);
 });
 
 test("6. Should remain active while typing valid value without blurring", async () => {
@@ -77,8 +81,8 @@ test("6. Should remain active while typing valid value without blurring", async 
   await input1.fill(validName);
 
   // Assert
-  await expect(input1).toHaveClass(/focus/);
-  await expect(input2).toHaveClass(/default/);
+  await expect(input1).toHaveCSS("border-color", colorFocus);
+  await expect(input2).toHaveCSS("border-color", colorDefault);
 });
 
 test("7. Should show success state when valid value is entered and input is blurred", async () => {
@@ -87,8 +91,8 @@ test("7. Should show success state when valid value is entered and input is blur
   await input1.blur();
 
   // Assert
-  await expect(input1).toHaveClass(/success/);
-  await expect(input2).toHaveClass(/default/);
+  await expect(input1).toHaveCSS("border-color", colorSuccess);
+  await expect(input2).toHaveCSS("border-color", colorDefault);
 });
 
 test("8. Should keep error state when focusing a field that already has an error", async () => {
@@ -99,7 +103,7 @@ test("8. Should keep error state when focusing a field that already has an error
 
     // Assert
     await expect(input1.getByText("Name is too short")).toBeVisible();
-    await expect(input2).toHaveClass(/default/);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
   await test.step("fill valid data", async () => {
@@ -107,8 +111,8 @@ test("8. Should keep error state when focusing a field that already has an error
     await input1.focus();
 
     // Assert
-    await expect(input1).toHaveClass(/error/);
-    await expect(input2).toHaveClass(/default/);
+    await expect(input1).toHaveCSS("border-color", colorError);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 });
 
@@ -120,7 +124,7 @@ test("9. Should keep error state while correcting invalid field without blurring
 
     // Assert
     await expect(input1.getByText("Name is too short")).toBeVisible();
-    await expect(input2).toHaveClass(/default/);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
   await test.step("fill valid data", async () => {
@@ -128,8 +132,8 @@ test("9. Should keep error state while correcting invalid field without blurring
     await input1.fill(validName);
 
     // Assert
-    await expect(input1).toHaveClass(/error/);
-    await expect(input2).toHaveClass(/default/);
+    await expect(input1).toHaveCSS("border-color", colorError);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 });
 
@@ -141,7 +145,7 @@ test("10. Should transition from error to success when valid value is entered an
 
     // Assert
     await expect(input1.getByText("Name is too short")).toBeVisible();
-    await expect(input2).toHaveClass(/default/);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
   await test.step("fill valid data", async () => {
@@ -150,8 +154,8 @@ test("10. Should transition from error to success when valid value is entered an
     await input1.blur();
 
     // Assert
-    await expect(input1).toHaveClass(/success/);
-    await expect(input2).toHaveClass(/default/);
+    await expect(input1).toHaveCSS("border-color", colorSuccess);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 });
 
@@ -163,7 +167,7 @@ test("11. Second field should not validate while active after first field has be
 
     // Assert
     await expect(input1.getByText("Name is too short")).toBeVisible();
-    await expect(input2).toHaveClass(/default/);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
   await test.step("first input: fill valid data", async () => {
@@ -172,8 +176,8 @@ test("11. Second field should not validate while active after first field has be
     await input1.blur();
 
     // Assert
-    await expect(input1).toHaveClass(/success/);
-    await expect(input2).toHaveClass(/default/);
+    await expect(input1).toHaveCSS("border-color", colorSuccess);
+    await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
   await test.step("second input: fill invalid data", async () => {
@@ -181,7 +185,7 @@ test("11. Second field should not validate while active after first field has be
     await input2.fill("e"); // just one character is enough to see if it will fail
 
     // Assert
-    await expect(input1).toHaveClass(/success/);
-    await expect(input2).toHaveClass(/focus/);
+    await expect(input1).toHaveCSS("border-color", colorSuccess);
+    await expect(input2).toHaveCSS("border-color", colorFocus);
   });
 });
