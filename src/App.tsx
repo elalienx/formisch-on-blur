@@ -1,6 +1,6 @@
 // Node modules
-import * as v from "valibot";
 import { Form, useForm } from "@formisch/react";
+import * as v from "valibot";
 
 // Project files
 import InputField from "./components/InputField";
@@ -25,8 +25,8 @@ export default function App() {
     revalidate: "blur",
   });
 
-  function onSubmit() {
-    alert("submitted");
+  function submitForm() {
+    if (form.isValid) alert("Success ✅");
   }
 
   return (
@@ -37,9 +37,20 @@ export default function App() {
         I have manage to make it work with the first field but the 2nd one
         behaves closer to validate on input rather than on blur.
       </p>
-      <Form of={form} onSubmit={onSubmit}>
-        <InputField id="name" label="Full name" placeholder="Jhon Smith" />
-        <InputField id="email" label="E-mail" placeholder="jhon@email.com" />
+
+      <Form of={form} onSubmit={submitForm}>
+        <InputField
+          form={form}
+          id="name"
+          label="Full name"
+          placeholder="Jhon Smith"
+        />
+        <InputField
+          form={form}
+          id="email"
+          label="E-mail"
+          placeholder="jhon@email.com"
+        />
         <button type="submit">Submit</button>
       </Form>
     </div>
