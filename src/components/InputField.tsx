@@ -1,3 +1,5 @@
+import "../styles/input-field.css";
+
 interface Props {
   id: string;
   label: string;

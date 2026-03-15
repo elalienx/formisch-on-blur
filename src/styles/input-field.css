@@ -1,0 +1,18 @@
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  padding: 0;
+  border: none;
+
+  label {
+    font-weight: 500;
+  }
+
+  input {
+    height: 44px;
+    padding-inline: var(--space-small);
+    border-radius: var(--border-radius);
+    border: none;
+  }
+}
