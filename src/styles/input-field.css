@@ -14,5 +14,22 @@
     padding-inline: var(--space-small);
     border-radius: var(--border-radius);
     border: solid 2px var(--color-gray);
+    outline: none; /* removes the browser blue border as we will use our own */
+  }
+
+  input:focus-within {
+    border-color: var(--color-blue);
+  }
+
+  input.success {
+    background-color: var(--color-green);
+  }
+
+  input.error {
+    background-color: var(--color-red);
+  }
+
+  .validation-message {
+    color: var(--color-red);
   }
 }
