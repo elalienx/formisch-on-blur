@@ -3,7 +3,7 @@ import { Form, useForm } from "@formisch/react";
 import * as v from "valibot";
 
 // Project files
-import InputField from "./components/InputField";
+import InputField from "./InputField";
 
 const schema = v.object({
   name: v.pipe(
