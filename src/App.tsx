@@ -26,7 +26,7 @@ export default function App() {
   });
 
   function submitForm() {
-    if (form.isValid) alert("Success ✅");
+    if (form.isValid) alert("Success!");
   }
 
   return (
