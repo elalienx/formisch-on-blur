@@ -1,7 +1,7 @@
 import { useField, type FormStore } from "@formisch/react";
 
 import "../styles/input-field.css";
-import { useEffect, useState, type FocusEvent } from "react";
+import { useState, type FocusEvent } from "react";
 
 interface Props {
   form: FormStore;
@@ -10,7 +10,7 @@ interface Props {
   placeholder?: string;
 }
 
-type UIState = "default" | "focus" | "error" | "success";
+type InputState = "default" | "focus" | "error" | "success";
 
 export default function InputField({
   form,
@@ -20,29 +20,40 @@ export default function InputField({
 }: Props) {
   // State
   const field = useField(form, { path: [id] });
-  const [uiState, setUIState] = useState<UIState>("default");
+  const [fieldIsFocused, setFieldIsFocused] = useState(false);
+
+  // Properties
+  const uiState: InputState = setState();
 
   // Methods
-  useEffect(() => {
-    if (form.isSubmitted && !field.isValid) {
-      setUIState("error");
+  function setState(): InputState {
+    if (!field.isValid && form?.isSubmitted) {
+      return "error";
     }
-  }, [form.isSubmitted, field.isValid]);
+
+    if (!field.isValid && field.isDirty) {
+      return "error";
+    }
+
+    if (fieldIsFocused) {
+      return "focus";
+    }
+
+    if (field.isValid && field.isDirty && !fieldIsFocused) {
+      return "success";
+    }
+
+    return "default";
+  }
+
+  function onFocus(event: FocusEvent<HTMLInputElement>) {
+    field.props.onFocus(event);
+    setFieldIsFocused(true);
+  }
 
   function onBlur(event: FocusEvent<HTMLInputElement>) {
     field.props.onBlur(event);
-
-    if (field.isDirty) {
-      console.log("running validation...");
-
-      if (field.isValid) {
-        console.log("field is valid ✅");
-        setUIState("success");
-      } else {
-        console.log("field is invalid ❌");
-        setUIState("error");
-      }
-    }
+    setFieldIsFocused(false);
   }
 
   return (
@@ -55,6 +66,7 @@ export default function InputField({
         type="text"
         placeholder={placeholder}
         onBlur={onBlur}
+        onFocus={onFocus}
       />
       {uiState === "error" && (
         <small className="validation-message">{field.errors?.[0]}</small>

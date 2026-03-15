@@ -102,7 +102,7 @@ test("8. Should keep error state when focusing a field that already has an error
     await input1.blur();
 
     // Assert
-    await expect(input1.getByText("Name is too short")).toBeVisible();
+    await expect(input1).toHaveCSS("border-color", colorError);
     await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
@@ -123,7 +123,7 @@ test("9. Should keep error state while correcting invalid field without blurring
     await input1.blur();
 
     // Assert
-    await expect(input1.getByText("Name is too short")).toBeVisible();
+    await expect(input1).toHaveCSS("border-color", colorError);
     await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
@@ -144,7 +144,7 @@ test("10. Should transition from error to success when valid value is entered an
     await input1.blur();
 
     // Assert
-    await expect(input1.getByText("Name is too short")).toBeVisible();
+    await expect(input1).toHaveCSS("border-color", colorError);
     await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
@@ -166,7 +166,7 @@ test("11. Second field should not validate while active after first field has be
     await input1.blur();
 
     // Assert
-    await expect(input1.getByText("Name is too short")).toBeVisible();
+    await expect(input1).toHaveCSS("border-color", colorError);
     await expect(input2).toHaveCSS("border-color", colorDefault);
   });
 
