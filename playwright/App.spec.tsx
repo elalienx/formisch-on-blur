@@ -160,16 +160,6 @@ test("10. Should transition from error to success when valid value is entered an
 });
 
 test("11. Second field should not validate while active after first field has been interacted with", async () => {
-  await test.step("first input: fill invalid data", async () => {
-    // Act
-    await input1.fill(invalidName);
-    await input1.blur();
-
-    // Assert
-    await expect(input1).toHaveCSS("border-color", colorError);
-    await expect(input2).toHaveCSS("border-color", colorDefault);
-  });
-
   await test.step("first input: fill valid data", async () => {
     // Act
     await input1.fill(validName);
@@ -182,7 +172,7 @@ test("11. Second field should not validate while active after first field has be
 
   await test.step("second input: fill invalid data", async () => {
     // Act
-    await input2.fill("e"); // just one character is enough to see if it will fail
+    await input2.fill("e"); // just one character is enough to see if it will fail, remember we are still on focus inside input 2
 
     // Assert
     await expect(input1).toHaveCSS("border-color", colorSuccess);

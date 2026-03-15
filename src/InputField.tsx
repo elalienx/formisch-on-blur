@@ -1,7 +1,7 @@
 import { useField, type FormStore } from "@formisch/react";
-
-import "../styles/input-field.css";
 import { useState, type FocusEvent } from "react";
+
+import "./styles/input-field.css";
 
 interface Props {
   form: FormStore;
