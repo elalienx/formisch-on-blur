@@ -53,6 +53,7 @@ export default function App() {
         />
         <button type="submit">Submit</button>
       </Form>
+      <small>Created with Formisch</small>
     </div>
   );
 }

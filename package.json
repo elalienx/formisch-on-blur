@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test-ct": "playwright test -c playwright-ct.config.ts"
+    "playwright": "playwright test -c playwright-ct.config.ts"
   },
   "dependencies": {
     "@formisch/react": "^0.4.3",
