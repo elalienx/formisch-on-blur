@@ -3,6 +3,7 @@
   --color-red: #c82c2c;
   --color-green: #2ac768;
   --color-blue: #0071eb;
+  --color-gray: #949596;
 
   /* Spacing */
   --space-small: 8px;
@@ -15,6 +16,7 @@
 body {
   max-width: 550px;
   margin-inline: auto;
+  background-color: lightgrey;
   font-family: "Helvetica Neue", Helvetica, system-ui, sans-serif;
   font-weight: 300;
 }
@@ -24,7 +26,7 @@ form {
   flex-direction: column;
   padding: var(--space-medium);
   gap: var(--space-medium);
-  background-color: lightgray;
+  background-color: white;
   border-radius: var(--border-radius);
 }
 
@@ -35,4 +37,3 @@ button {
   color: white;
   border: none;
 }
-
