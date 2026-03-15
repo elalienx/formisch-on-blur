@@ -31,12 +31,7 @@ export default function App() {
 
   return (
     <div id="App">
-      <h1>This is a Sample Form Page</h1>
-      <p>The goal is to validate the fields on blur instead of typing.</p>
-      <p>
-        I have manage to make it work with the first field but the 2nd one
-        behaves closer to validate on input rather than on blur.
-      </p>
+      <h1>Sample Form Page</h1>
 
       <Form of={form} onSubmit={submitForm}>
         <InputField
@@ -53,6 +48,7 @@ export default function App() {
         />
         <button type="submit">Submit</button>
       </Form>
+
       <small>Created with Formisch</small>
     </div>
   );
