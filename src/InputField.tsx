@@ -24,6 +24,9 @@ export default function InputField({
   const [inputState, setInputstate] = useState<InputState>("default");
   const [fieldIsFocused, setFieldIsFocused] = useState(false);
 
+  // Properties
+  const ariaErrorName = `aria-error-${id}`;
+
   // Methods
   useEffect(
     function calculateInputState() {
@@ -78,9 +81,13 @@ export default function InputField({
         placeholder={placeholder}
         onBlur={onBlur}
         onFocus={onFocus}
+        aria-invalid={!!field.errors}
+        aria-errormessage={ariaErrorName}
       />
       {inputState === "error" && (
-        <small className="validation-message">{field.errors?.[0]}</small>
+        <small id={ariaErrorName} className="validation-message">
+          {field.errors?.[0]}
+        </small>
       )}
     </fieldset>
   );
