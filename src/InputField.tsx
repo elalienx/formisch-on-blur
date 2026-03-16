@@ -59,6 +59,7 @@ export default function InputField({
       inputState,
     ],
   );
+  
 
   function onFocus(event: FocusEvent<HTMLInputElement>) {
     field.props.onFocus(event);
@@ -76,13 +77,13 @@ export default function InputField({
       <input
         {...field.props}
         id={id}
+        aria-errormessage={ariaErrorName}
+        aria-invalid={!!field.errors}
         className={inputState}
-        type="text"
-        placeholder={placeholder}
         onBlur={onBlur}
         onFocus={onFocus}
-        aria-invalid={!!field.errors}
-        aria-errormessage={ariaErrorName}
+        placeholder={placeholder}
+        type="text"
       />
       {inputState === "error" && (
         <small id={ariaErrorName} className="validation-message">
