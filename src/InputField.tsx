@@ -27,7 +27,7 @@ export default function InputField({
   // Methods
   useEffect(
     function calculateInputState() {
-      // Show errors after submitting untouched fields
+      // Show error after form submission
       if (form.isSubmitted && !field.isValid) {
         setInputstate("error");
         return;
@@ -57,14 +57,17 @@ export default function InputField({
         return;
       }
 
-      // After blur validation
+      // Validate success
       if (field.isValid) {
         setInputstate("success");
         return;
       }
 
-      // Else the field has an error
-      setInputstate("error");
+      // Validate failure
+      if (!field.isValid) {
+        setInputstate("error");
+        return;
+      }
     },
     [
       fieldIsFocused,
