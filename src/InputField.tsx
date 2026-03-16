@@ -19,6 +19,7 @@ export default function InputField({
   placeholder = "",
 }: Props) {
   // State
+  // @ts-ignore
   const field = useField(form, { path: [id] });
   const [fieldIsFocused, setFieldIsFocused] = useState(false);
 
