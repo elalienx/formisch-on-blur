@@ -10,7 +10,7 @@ interface Props {
   placeholder?: string;
 }
 
-type InputState = "default" | "focus" | "error" | "success";
+type InputState = "default" | "error" | "success";
 
 export default function InputField({
   form,
@@ -28,10 +28,7 @@ export default function InputField({
   useEffect(
     function calculateInputState() {
       // Show error after form submission
-      if (form.isSubmitted && !field.isValid) {
-        setInputstate("error");
-        return;
-      }
+      if (form.isSubmitted && !field.isValid) setInputstate("error");
 
       // If the field already had an error, keep it even when focusing again
       if (fieldIsFocused && inputState === "error") return;
