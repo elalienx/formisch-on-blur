@@ -26,28 +26,63 @@ export default function InputField({
 
   // Methods
   useEffect(
-    function showErrorOnFormSubmit() {
-      if (form.isSubmitted && !form.isValid && !fieldIsFocused) {
+    function calculateInputState() {
+      // Show errors after submitting untouched fields
+      if (form.isSubmitted && !field.isValid) {
         setInputstate("error");
+        return;
       }
+
+      // If the field already had an error, keep it even when focusing again
+      if (fieldIsFocused && inputState === "error") {
+        setInputstate("error");
+        return;
+      }
+
+      // If the field already had a success, keep it even when focusing again
+      if (fieldIsFocused && inputState === "success") {
+        setInputstate("success");
+        return;
+      }
+
+      // While editing a fresh field, stay in focus state
+      if (fieldIsFocused) {
+        setInputstate("focus");
+        return;
+      }
+
+      // Default before interaction
+      if (!field.isDirty) {
+        setInputstate("default");
+        return;
+      }
+
+      // After blur validation
+      if (field.isValid) {
+        setInputstate("success");
+        return;
+      }
+
+      // Else the field has an error
+      setInputstate("error");
     },
-    [form.isSubmitted, field.isValid, fieldIsFocused],
+    [
+      fieldIsFocused,
+      form.isSubmitted,
+      field.isDirty,
+      field.isValid,
+      inputState,
+    ],
   );
 
   function onFocus(event: FocusEvent<HTMLInputElement>) {
     field.props.onFocus(event);
     setFieldIsFocused(true);
-
-    if (inputState === "default") setInputstate("focus");
   }
 
   function onBlur(event: FocusEvent<HTMLInputElement>) {
     field.props.onBlur(event);
     setFieldIsFocused(false);
-
-    if (!field.isDirty) setInputstate("default");
-    if (field.isDirty && field.isValid) setInputstate("success");
-    if (field.isDirty && !field.isValid) setInputstate("error");
   }
 
   return (
