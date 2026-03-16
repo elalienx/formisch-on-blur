@@ -34,40 +34,22 @@ export default function InputField({
       }
 
       // If the field already had an error, keep it even when focusing again
-      if (fieldIsFocused && inputState === "error") {
-        setInputstate("error");
-        return;
-      }
+      if (fieldIsFocused && inputState === "error") return;
 
       // If the field already had a success, keep it even when focusing again
-      if (fieldIsFocused && inputState === "success") {
-        setInputstate("success");
-        return;
-      }
+      if (fieldIsFocused && inputState === "success") return;
 
       // While editing a fresh field, stay in focus state
-      if (fieldIsFocused) {
-        setInputstate("focus");
-        return;
-      }
+      if (fieldIsFocused) return;
 
       // Default before interaction
-      if (!field.isDirty) {
-        setInputstate("default");
-        return;
-      }
+      if (!field.isDirty) return;
 
       // Validate success
-      if (field.isValid) {
-        setInputstate("success");
-        return;
-      }
+      if (field.isValid) setInputstate("success");
 
       // Validate failure
-      if (!field.isValid) {
-        setInputstate("error");
-        return;
-      }
+      if (!field.isValid) setInputstate("error");
     },
     [
       fieldIsFocused,
