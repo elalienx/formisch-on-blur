@@ -24,10 +24,10 @@ export default function InputField({
   const [fieldIsFocused, setFieldIsFocused] = useState(false);
 
   // Properties
-  const uiState: InputState = setState();
+  const uiState: InputState = updateUIState();
 
   // Methods
-  function setState(): InputState {
+  function updateUIState(): InputState {
     if (!field.isValid && form?.isSubmitted) {
       return "error";
     }
